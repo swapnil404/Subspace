@@ -1,164 +1,196 @@
 # Subspace — Web App PRD
 
-## 1. Overview
+## 1. Executive Summary
 
 **Product:** Subspace
 **Platform:** Web (Desktop & Mobile Web)
 **Stage:** MVP → v1
 
-Subspace is a secure, end‑to‑end encrypted real‑time messaging web application built with a zero‑knowledge server architecture. All cryptography is performed client‑side; the backend never has access to plaintext messages or private keys.
+Subspace is a security‑first, open‑source, end‑to‑end encrypted (E2EE) real‑time messaging web application. It uses a **zero‑knowledge server architecture**: all cryptography is performed client‑side, and the backend never accesses plaintext messages or private keys.
+
+The MVP focuses on **1:1 text messaging** with strong cryptographic guarantees, simple onboarding, and a modern real‑time web stack.
 
 ---
 
-## 2. Problem
+## 2. Problem Statement
 
-Many messaging apps marketed as “secure” rely on shared keys, server‑side encryption, or designs where the server can read user messages. These approaches fail to provide real end‑to‑end security and forward secrecy.
+Many messaging platforms claim to be secure but retain architectural weaknesses such as:
 
-Subspace addresses this by implementing modern cryptography at the client edge, ensuring message confidentiality even if backend infrastructure is compromised.
+* Server‑side encryption or key handling
+* Shared or static encryption keys
+* Incomplete forward secrecy
+
+These designs expose users to message compromise if backend infrastructure is breached.
+
+Subspace addresses this by enforcing **client‑only cryptography**, **cryptographic user identity**, and **forward secrecy by default**, ensuring confidentiality even under total server compromise.
 
 ---
 
-## 3. Goals
+## 3. Goals & Non‑Goals
 
-### Primary Goals
+### 3.1 Primary Goals
 
 * True end‑to‑end encrypted messaging
-* Zero‑knowledge backend (server cannot decrypt messages)
-* Simple onboarding with strong security guarantees
-* Scalable, modern web architecture
+* Zero‑knowledge backend (no plaintext, no private keys)
+* Forward secrecy for all conversations
+* Simple onboarding with no manual key management
+* Scalable real‑time web architecture
 
-### Success Metrics
+### 3.2 Success Metrics
 
-* No plaintext message data stored or processed server‑side
-* Reliable real‑time messaging between users
-* Clear architectural differentiation from basic encrypted chat apps
+* Backend stores only encrypted payloads and public metadata
+* Messages reliably delivered in real time
+* Clear, auditable cryptographic boundaries in codebase
+
+### 3.3 Explicit Non‑Goals (MVP)
+
+* Group chats
+* Media / file sharing
+* Voice or video calls
+* Multi‑device sync
+* Push notifications
+* Message search
 
 ---
 
 ## 4. Target Users
 
-* General users seeking private and secure communication
-* Small teams or communities requiring confidential messaging
-* Developers evaluating modern E2EE system design
+* Privacy‑conscious individuals
+* Small teams requiring confidential communication
+* Developers and security engineers evaluating E2EE architectures
 
 ---
 
-## 5. Accounts & Identity
+## 5. Identity & Authentication
 
-### 5.1 User Accounts
+### 5.1 User Account
 
-* Users create an account with a **globally unique username**
-* Authentication mechanism (email / OAuth / passkey) is abstracted from cryptographic identity
+* Users register with a **globally unique username**
+* Authentication (email / OAuth / passkey) is **decoupled** from cryptographic identity
+* Auth provider is replaceable without breaking cryptographic guarantees
 
-### 5.2 User ID
+### 5.2 User Identifier
 
 * Each user is assigned a **unique, immutable User ID**
-* Used internally and for adding contacts
-* Username is human‑readable; User ID is canonical
+* User ID is canonical and used for:
 
-### 5.3 Cryptographic Identity
-
-Generated client‑side on first login:
-
-* Ed25519 identity key pair (signing)
-* X25519 key pair (key exchange)
-
-Private keys:
-
-* Never leave the client
-* Stored locally in browser storage (IndexedDB)
-
-Public keys:
-
-* Uploaded to the backend for discovery
+  * Contacts
+  * Conversations
+  * Key discovery
+* Username is mutable and human‑readable
 
 ---
 
-## 6. Contacts & Discovery
+## 6. Cryptographic Identity
 
-* Users add contacts using the contact’s **User ID**
-* Backend validates existence and returns public keys
-* No phone numbers or emails are required or exposed
+### 6.1 Key Material (Client‑Side)
+
+Generated on first authenticated session:
+
+* **Ed25519** key pair (identity + signatures)
+* **X25519** key pair (key exchange)
+
+### 6.2 Private Keys
+
+* Generated and stored **only on the client**
+* Persisted in **IndexedDB**
+* Never transmitted to the backend
+
+### 6.3 Public Keys
+
+* Uploaded to backend for discovery
+* Versioned to support future key rotation
 
 ---
 
-## 7. Messaging & Encryption
+## 7. Contacts & Discovery
 
-### 7.1 Encryption Model
+* Users add contacts via **User ID**
+* Backend validates existence and returns public key bundle
+* No phone numbers, emails, or social graph exposure
 
-* All encryption and decryption occurs client‑side
-* Backend stores and forwards encrypted payloads only
+---
 
-### Cryptographic Stack
+## 8. Messaging & Encryption
+
+### 8.1 Encryption Model
+
+* All encryption/decryption occurs client‑side
+* Backend acts only as a message relay and encrypted blob store
+
+### 8.2 Cryptographic Stack
 
 * Identity & signatures: **Ed25519**
 * Key exchange: **X25519**
 * Key derivation: **HKDF‑SHA256**
-* Message encryption: **ChaCha20‑Poly1305**
-* Forward secrecy: Per‑conversation key ratcheting (Double Ratchet inspired)
+* Symmetric encryption: **ChaCha20‑Poly1305**
+* Forward secrecy: **Per‑conversation ratcheting** (Double Ratchet‑inspired)
+
+### 8.3 Session Establishment
+
+* Initial key exchange performed on first contact
+* Session keys derived per conversation
+* Keys are rotated automatically
 
 ---
 
-### 7.2 Message Flow
+## 9. Message Lifecycle
 
-1. Sender encrypts message in the browser
-2. Encrypted message is sent to backend
+1. Sender encrypts message locally
+2. Encrypted payload + metadata sent to backend
 3. Backend stores encrypted blob
-4. Receiver fetches encrypted message
-5. Receiver decrypts message locally
+4. Backend notifies recipient via WebSocket
+5. Recipient fetches and decrypts locally
 
-At no point does the backend access plaintext content.
+**Backend never accesses plaintext at any stage.**
 
 ---
 
-## 8. Core Features (MVP)
+## 10. Core Features (MVP)
 
 * Account creation & authentication
 * One‑to‑one encrypted real‑time messaging
 * Contact management (add by User ID)
 * Message timestamps
-* Delivery status (sent / delivered)
-* Automatic key generation and session establishment
+* Delivery state: sent / delivered
+* Automatic key generation and session management
 
 ---
 
-## 9. Explicit Non‑Goals (MVP)
+## 11. Backend Responsibilities
 
-* Group chats
-* Media/file sharing
-* Voice or video calls
-* Multi‑device synchronization
-* Push notifications
-
----
-
-## 10. Backend Responsibilities
-
-**Backend stack:** Hono (Vercel)
+**Backend Stack:** Hono (Vercel)
 
 ### Responsibilities
 
-* Authentication
+* Authentication handling
 * User metadata storage
-* Public key storage
-* Encrypted message storage
-* Message delivery via HTTP/WebSockets
+* Public key discovery
+* Encrypted message persistence
+* Real‑time delivery via WebSockets
 
-### Non‑Responsibilities
+### Explicit Non‑Responsibilities
 
 * Encrypting messages
 * Decrypting messages
-* Generating or storing private keys
+* Generating, storing, or rotating private keys
 
 ---
 
-## 11. Data Model (High‑Level)
+## 12. Data Model (High‑Level)
 
 ### Users
 
 * id
 * username
-* public_keys
+* public_key_bundle
+* created_at
+
+### Conversations
+
+* id
+* user_a_id
+* user_b_id
 * created_at
 
 ### Messages
@@ -170,53 +202,57 @@ At no point does the backend access plaintext content.
 * nonce (bytea)
 * created_at
 
-No plaintext message fields exist.
+**No plaintext or derived message content is stored.**
 
 ---
 
-## 12. Security Guarantees
+## 13. Security Guarantees
+
+### Guaranteed
 
 * End‑to‑end encryption
 * Forward secrecy
-* Zero‑knowledge server
-* No shared encryption keys
+* Zero‑knowledge backend
+* Cryptographic user identity
 
-Threats mitigated:
+### Threats Mitigated
 
 * Server compromise
 * Database leaks
 * Passive network monitoring
 
+### Out of Scope (MVP)
+
+* Active MITM during first key exchange
+* Compromised client devices
+
 ---
 
-## 13. UX & Interface Design
+## 14. UX & Interface
 
 ### UX Principles
 
 * Security by default
-* Minimal configuration
-* Clear identity indicators
-* Key‑change warnings
-
-Users are never required to manually manage keys.
+* No manual key management
+* Clear identity and trust signals
+* Explicit key‑change warnings
 
 ### UI Direction
 
-* Discord‑like layout and interaction model
-* Left sidebar for conversations and contacts
-* Central message pane for active chat
-* Right‑side context panel (future extensibility)
+* Discord‑like layout
+* Left sidebar: contacts / conversations
+* Center pane: messages
+* Minimal, distraction‑free design
 
 ### UI Implementation
 
-* Built with **shadcn/ui** components
-* Consistent spacing, typography, and color tokens
-* Keyboard‑first interactions
-* Responsive for desktop and mobile web
+* **React + shadcn/ui**
+* Keyboard‑first navigation
+* Fully responsive web UI
 
 ---
 
-## 14. Tech Stack
+## 15. Tech Stack
 
 ### Frontend
 
@@ -244,32 +280,28 @@ Users are never required to manually manage keys.
 
 ---
 
-## 15. Future Enhancements
+## 16. Open‑Source Strategy
+
+* Fully open‑source core
+* Public cryptographic review encouraged
+* Clear separation of crypto, transport, and UI layers
+
+---
+
+## 17. Future Enhancements
 
 * Group chats
 * Encrypted media sharing
 * Disappearing messages
 * QR‑based key verification
-* Mobile applications (React Native)
+* Multi‑device support
+* Mobile apps (React Native)
 
 ---
 
-## 16. Differentiation
+## 18. Open Questions
 
-Subspace differs from basic encrypted chat applications by providing:
-
-* No shared secrets
-* No server‑side encryption
-* Cryptographic user identity
-* Forward secrecy by default
-
-It is designed as a security‑first messaging system, not a demonstration app.
-
----
-
-## 17. Open Questions
-
-* Final authentication provider selection
-* Username length and validation rules
-* Rate limiting and abuse prevention
-  n
+* Final authentication provider
+* Username rules and collision handling
+* Abuse prevention and rate limiting
+* Initial key verification UX
