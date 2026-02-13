@@ -1,8 +1,8 @@
-import type { FC, PropsWithChildren } from "hono/jsx";
+import type { FC, PropsWithChildren } from "react";
 
 export const Sidebar: FC<PropsWithChildren> = ({ children }) => {
     return (
-        <aside class="sidebar">
+        <aside className="sidebar">
             {children}
         </aside>
     );
@@ -10,7 +10,7 @@ export const Sidebar: FC<PropsWithChildren> = ({ children }) => {
 
 export const SidebarContent: FC<PropsWithChildren> = ({ children }) => {
     return (
-        <div class="sidebar-content">
+        <div className="sidebar-content">
             {children}
         </div>
     );
@@ -18,7 +18,7 @@ export const SidebarContent: FC<PropsWithChildren> = ({ children }) => {
 
 export const SidebarHeader: FC<PropsWithChildren> = ({ children }) => {
     return (
-        <div class="sidebar-header">
+        <div className="sidebar-header">
             {children}
         </div>
     );
@@ -26,7 +26,7 @@ export const SidebarHeader: FC<PropsWithChildren> = ({ children }) => {
 
 export const SidebarFooter: FC<PropsWithChildren> = ({ children }) => {
     return (
-        <div class="sidebar-footer">
+        <div className="sidebar-footer">
             {children}
         </div>
     );
@@ -34,7 +34,7 @@ export const SidebarFooter: FC<PropsWithChildren> = ({ children }) => {
 
 export const SidebarGroup: FC<PropsWithChildren> = ({ children }) => {
     return (
-        <div class="sidebar-group">
+        <div className="sidebar-group">
             {children}
         </div>
     );
