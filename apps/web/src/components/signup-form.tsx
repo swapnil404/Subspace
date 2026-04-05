@@ -40,11 +40,10 @@ export function SignupForm({
         {
           onSuccess: () => {
             toast.success("Account created successfully!")
-            // @ts-expect-error - Route tree generation might not have picked this up yet
             navigate({ to: "/dashboard" })
           },
           onError: (ctx) => {
-            toast.error(ctx.error.message || "Something went wrong")
+            toast.error((ctx as any).error?.message || "Something went wrong")
           },
         }
       )

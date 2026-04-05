@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "hono/jsx";
+import type { FC, PropsWithChildren } from "react";
 
 type FieldProps = PropsWithChildren & {
     class?: string;
@@ -6,7 +6,7 @@ type FieldProps = PropsWithChildren & {
 
 export const Field: FC<FieldProps> = ({ children, class: className }) => {
     return (
-        <div class={`field ${className ?? ""}`}>
+        <div className={`field ${className ?? ""}`}>
             {children}
         </div>
     );
@@ -18,7 +18,7 @@ type FieldLabelProps = PropsWithChildren & {
 
 export const FieldLabel: FC<FieldLabelProps> = ({ children, htmlFor }) => {
     return (
-        <label class="field-label" for={htmlFor}>
+        <label className="field-label" htmlFor={htmlFor}>
             {children}
         </label>
     );

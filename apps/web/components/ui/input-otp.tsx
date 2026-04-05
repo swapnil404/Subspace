@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "hono/jsx";
+import type { FC, PropsWithChildren } from "react";
 
 type InputOTPProps = PropsWithChildren & {
     id?: string;
@@ -9,7 +9,7 @@ type InputOTPProps = PropsWithChildren & {
 export const InputOTP: FC<InputOTPProps> = ({ children, id, maxLength, pattern }) => {
     const patternStr = pattern instanceof RegExp ? pattern.source : pattern;
     return (
-        <div class="input-otp" id={id} data-max-length={maxLength} data-pattern={patternStr}>
+        <div className="input-otp" id={id} data-max-length={maxLength} data-pattern={patternStr}>
             {children}
         </div>
     );
@@ -17,7 +17,7 @@ export const InputOTP: FC<InputOTPProps> = ({ children, id, maxLength, pattern }
 
 export const InputOTPGroup: FC<PropsWithChildren> = ({ children }) => {
     return (
-        <div class="input-otp-group">
+        <div className="input-otp-group">
             {children}
         </div>
     );
@@ -30,16 +30,16 @@ type InputOTPSlotProps = {
 export const InputOTPSlot: FC<InputOTPSlotProps> = ({ index }) => {
     return (
         <input
-            class="input-otp-slot"
+            className="input-otp-slot"
             type="text"
             maxLength={1}
             data-index={index}
             inputMode="numeric"
-            autocomplete="one-time-code"
+            autoComplete="one-time-code"
         />
     );
 };
 
 export const InputOTPSeparator: FC = () => {
-    return <span class="input-otp-separator">-</span>;
+    return <span className="input-otp-separator">-</span>;
 };
