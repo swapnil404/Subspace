@@ -7,76 +7,95 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #fafafa;
+  --foreground: #2e3338;
+  --card: #ffffff;
+  --card-foreground: #2e3338;
+  --popover: #ffffff;
+  --popover-foreground: #2e3338;
+  --primary: #5865f2;
+  --primary-foreground: #ffffff;
+  --secondary: #e3e5e8;
+  --secondary-foreground: #4e5058;
+  --muted: #e3e5e8;
+  --muted-foreground: #72767d;
+  --accent: #5865f2;
+  --accent-foreground: #ffffff;
+  --destructive: #ed4245;
+  --border: #e3e5e8;
+  --input: #e3e5e8;
+  --ring: #5865f2;
+  --radius: 0.5rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2e3338;
+  --sidebar-primary: #5865f2;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e3e5e8;
+  --sidebar-accent-foreground: #2e3338;
+  --sidebar-border: #e3e5e8;
+  --sidebar-ring: #5865f2;
+
+  --discord-blurple: #5865f2;
+  --discord-green: #23a559;
+  --discord-yellow: #fee75c;
+  --discord-red: #ed4245;
+  --discord-pink: #eb459e;
+  --discord-voice: #23a559;
+  --discord-mention-bg: rgba(88, 101, 242, 0.15);
+
+  --sidebar-bg: #ffffff;
+  --channels-bg: #f2f3f5;
+  --chat-bg: #f2f3f5;
+  --hover-bg: rgba(116, 127, 153, 0.1);
+  --active-bg: rgba(116, 127, 153, 0.15);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.87 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #111214;
+  --foreground: #f2f3f5;
+  --card: #1e1f22;
+  --card-foreground: #f2f3f5;
+  --popover: #313338;
+  --popover-foreground: #f2f3f5;
+  --primary: #5865f2;
+  --primary-foreground: #ffffff;
+  --secondary: #313338;
+  --secondary-foreground: #b5bac1;
+  --muted: #2b2d31;
+  --muted-foreground: #949ba4;
+  --accent: #5865f2;
+  --accent-foreground: #ffffff;
+  --destructive: #ed4245;
+  --border: #3f4148;
+  --input: #383a40;
+  --ring: #5865f2;
+  --radius: 0.5rem;
+  --sidebar: #111214;
+  --sidebar-foreground: #f2f3f5;
+  --sidebar-primary: #5865f2;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #313338;
+  --sidebar-accent-foreground: #f2f3f5;
+  --sidebar-border: #3f4148;
+  --sidebar-ring: #5865f2;
+
+  --discord-blurple: #5865f2;
+  --discord-green: #23a559;
+  --discord-yellow: #fee75c;
+  --discord-red: #ed4245;
+  --discord-pink: #eb459e;
+  --discord-voice: #23a559;
+  --discord-mention-bg: rgba(88, 101, 242, 0.2);
+
+  --sidebar-bg: #111214;
+  --channels-bg: #1e1f22;
+  --chat-bg: #313338;
+  --hover-bg: rgba(79, 84, 92, 0.4);
+  --active-bg: rgba(79, 84, 92, 0.6);
 }
 
 @theme inline {
-  --font-sans: "Inter Variable", sans-serif;
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -85,11 +104,11 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+  --color-chart-5: #42434d;
+  --color-chart-4: #5865f2;
+  --color-chart-3: #23a559;
+  --color-chart-2: #fee75c;
+  --color-chart-1: #ed4245;
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -122,9 +141,106 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply font-sans bg-background text-foreground;
+    @apply font-sans bg-background text-foreground antialiased;
   }
   html {
-    @apply font-sans;
+    @apply scroll-smooth font-sans;
+  }
+}
+
+::selection {
+  background-color: var(--discord-blurple);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@layer utilities {
+  .server-icon {
+    @apply relative flex items-center justify-center rounded-full transition-all duration-200 cursor-pointer;
+  }
+
+  .server-icon:hover {
+    @apply rounded-xl;
+  }
+
+  .server-icon.active {
+    @apply rounded-xl;
+  }
+
+  .channel-text {
+    @apply flex items-center gap-2 px-2 py-1 rounded-md text-sm transition-colors cursor-pointer;
+    @apply text-[--muted-foreground] hover:bg-[--hover-bg] hover:text-[--foreground];
+  }
+
+  .channel-text.active {
+    @apply bg-[--active-bg] text-[--foreground];
+  }
+
+  .channel-voice {
+    @apply flex items-center gap-2 px-2 py-1 rounded-md text-sm transition-colors cursor-pointer;
+    @apply text-[--muted-foreground] hover:bg-[--hover-bg] hover:text-[--foreground];
+  }
+
+  .status-indicator {
+    @apply absolute bottom-0 right-0 rounded-full border-2;
+    border-color: var(--sidebar-bg);
+  }
+
+  .mention-highlight {
+    background-color: var(--discord-mention-bg);
+  }
+
+  .pro-gradient {
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f43f5e 100%);
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
   }
 }

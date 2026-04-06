@@ -1,1 +1,199 @@
-@import "@my-better-t-app/ui/globals.css";
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #fafafa;
+  --foreground: #2e3338;
+  --card: #ffffff;
+  --card-foreground: #2e3338;
+  --popover: #ffffff;
+  --popover-foreground: #2e3338;
+  --primary: #5865f2;
+  --primary-foreground: #ffffff;
+  --secondary: #e3e5e8;
+  --secondary-foreground: #4e5058;
+  --muted: #e3e5e8;
+  --muted-foreground: #72767d;
+  --accent: #5865f2;
+  --accent-foreground: #ffffff;
+  --destructive: #ed4245;
+  --border: #e3e5e8;
+  --input: #e3e5e8;
+  --ring: #5865f2;
+  --radius: 0.5rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2e3338;
+  --sidebar-primary: #5865f2;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e3e5e8;
+  --sidebar-accent-foreground: #2e3338;
+  --sidebar-border: #e3e5e8;
+  --sidebar-ring: #5865f2;
+
+  --discord-blurple: #5865f2;
+  --discord-green: #23a559;
+  --discord-yellow: #fee75c;
+  --discord-red: #ed4245;
+  --discord-pink: #eb459e;
+  --discord-voice: #23a559;
+  --discord-mention-bg: rgba(88, 101, 242, 0.15);
+
+  --sidebar-bg: #ffffff;
+  --channels-bg: #f2f3f5;
+  --chat-bg: #f2f3f5;
+  --hover-bg: rgba(116, 127, 153, 0.1);
+  --active-bg: rgba(116, 127, 153, 0.15);
+}
+
+.dark {
+  --background: #111214;
+  --foreground: #f2f3f5;
+  --card: #1e1f22;
+  --card-foreground: #f2f3f5;
+  --popover: #313338;
+  --popover-foreground: #f2f3f5;
+  --primary: #5865f2;
+  --primary-foreground: #ffffff;
+  --secondary: #313338;
+  --secondary-foreground: #b5bac1;
+  --muted: #2b2d31;
+  --muted-foreground: #949ba4;
+  --accent: #5865f2;
+  --accent-foreground: #ffffff;
+  --destructive: #ed4245;
+  --border: #3f4148;
+  --input: #383a40;
+  --ring: #5865f2;
+  --radius: 0.5rem;
+  --sidebar: #111214;
+  --sidebar-foreground: #f2f3f5;
+  --sidebar-primary: #5865f2;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #313338;
+  --sidebar-accent-foreground: #f2f3f5;
+  --sidebar-border: #3f4148;
+  --sidebar-ring: #5865f2;
+
+  --discord-blurple: #5865f2;
+  --discord-green: #23a559;
+  --discord-yellow: #fee75c;
+  --discord-red: #ed4245;
+  --discord-pink: #eb459e;
+  --discord-voice: #23a559;
+  --discord-mention-bg: rgba(88, 101, 242, 0.2);
+
+  --sidebar-bg: #111214;
+  --channels-bg: #1e1f22;
+  --chat-bg: #313338;
+  --hover-bg: rgba(79, 84, 92, 0.4);
+  --active-bg: rgba(79, 84, 92, 0.6);
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.pro-gradient {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f43f5e 100%);
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-in {
+  animation: animate-in 0.2s ease-out;
+}
+
+@keyframes animate-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.fade-in-0 { opacity: 0; }
+.zoom-in-95 { transform: scale(0.95); }
+.slide-in-from-left-2 { transform: translateX(-8px); }
+.slide-in-from-bottom-4 { transform: translateY(16px); }
+.duration-150 { transition-duration: 150ms; }
+.duration-200 { transition-duration: 200ms; }
+.duration-300 { transition-duration: 300ms; }
